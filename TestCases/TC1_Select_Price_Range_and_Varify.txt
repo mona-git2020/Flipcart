@@ -4,15 +4,15 @@ Library		String
 Library		Collections	
 Resource	../Common/Common_Variables.txt
 Resource	../Resources/Keywords.txt	
-Suite Setup		Open Makemytrip
-#Suite Teardown	Close Browser
+Suite Setup		Open Flipcart
+Suite Teardown	Close Browser
 
 *** Test Cases ***
 Select Price Range For Samsung And Verify Price According to Selected Price Range
 	${statusLoginBox}=		Run Keyword And Return Status		Element Should Be Visible		${LoginBox}
 	Run Keyword If		${statusLoginBox}==True			Click Element		${LoginCrossButton}
 	Wait Until Element Is Visible		${ToolbarButtons}		timeout=15s
-	Click Element		${ElectronicsToolbarButton}
+	Mouse Over			${ElectronicsToolbarButton}
 	Wait Until Element Is Visible		${SamsungLink}
 	Click Element		${SamsungLink}	
 	Wait Until Element Is Visible		${Results}		timeout=15s
@@ -21,8 +21,42 @@ Select Price Range For Samsung And Verify Price According to Selected Price Rang
 	Wait Until Element Is Visible		${FilteredResults}
 	Click Element		${MinimumPriceSelectionBox}
 	Click Element		${SelectMinimumPrice}
+	${miniPrice}=		Get Value		${SelectMinimumPrice}
 	Wait Until Element Is Visible		${FilteredResults}
-	Wait Until Element Is Visible		${MaximumPriceSelectionBox}	
+	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s
 	Click Element		${MaximumPriceSelectionBox}
 	Click Element		${SelectMaximumPrice}
-	Wait Until Element Is Visible		${FilteredResults}	
+	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
+	${maxiPrice}=		Get Value		${SelectMaximumPrice}
+	Wait Until Element Is Visible		${FilteredResults}
+	: FOR	${pageNumber}		IN RANGE		1000	
+	\	Verify Price According to Selected Price Range		${miniPrice}		${maxiPrice}
+	\	${statusNextButton}=		Run Keyword And Return Status		Element Should Be Visible		${NextButton}
+	\	Run Keyword If		${statusNextButton}==True		Click Element		${NextButton}
+	\	...			ELSE		Exit For Loop
+	\	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
+	\	Wait Until Element is visible		${FilteredResults}
+	\	${pageNumber}=		Evaluate		${pageNumber}+1
+
+*** Keywords ***
+Verify Price According to Selected Price Range
+	[Arguments]		${miniPrice}		${maxiPrice}			
+	${totalResults}=		Get Element Count		${FilteredResults}	
+	: For		${singleResultNum}		IN RANGE		2		${totalResults}+1
+	\	${resultNumber}=		Convert To String		${singleResultNum}
+	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		NUM		${resultNumber}
+	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		NUM		${resultNumber}
+	\	${price}=		Get Text		${DisplayedPrice}
+	\	${price}=		Get Substring		${price}		1
+	\	${price}=		Remove String		${price}		,
+	\	Should Be True		${miniPrice}<=${price}
+	\	Should Be True		${maxiPrice}>=${price}
+	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
+	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
+	
+	
+	
+	
+	
+	
+	
