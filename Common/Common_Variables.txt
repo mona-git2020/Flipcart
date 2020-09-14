@@ -1,8 +1,8 @@
 *** Variables ***
 ${LoginBox}=		css=div[class="_2ISNhP _3AOFWO"]
 ${LoginCrossButton}=		css=button[class="_2AkmmA _29YdH8"]
-${ToolbarButtons}=		css=span[class="_1QZ6fC _3Lgyp8"]
-${ElectronicsToolbarButton}=		css=ul[class="_114Zhd"]>li:nth-child(1)
+${ToolbarButtons}=		css=span[class="_2FZd5H"]
+${ElectronicsToolbarButton}=		css=span[class='_2FZd5H']:nth-child(1)
 ${SamsungLink}=			css=a[title="Samsung"]
 ${Results}=		css=div[class="_2kSfQ4"]
 ${ViewAllButton}=		css=div[class="_3e7xtJ"] div[class="bhgxx2 col-12-12"]:nth-child(1) div[class="_2rQIn7"]

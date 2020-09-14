@@ -8,7 +8,7 @@ Suite Setup		Open Flipcart
 Suite Teardown	Close Browser
 
 *** Test Cases ***
-Select Price Range For Samsung And Verify Price According to Selected Price Range
+Select Samsung From Electronics Toolbar And Select Maximum & Minimum Price From Price Range
 	${statusLoginBox}=		Run Keyword And Return Status		Element Should Be Visible		${LoginBox}
 	Run Keyword If		${statusLoginBox}==True			Click Element		${LoginCrossButton}
 	Wait Until Element Is Visible		${ToolbarButtons}		timeout=15s
@@ -21,12 +21,16 @@ Select Price Range For Samsung And Verify Price According to Selected Price Rang
 	Wait Until Element Is Visible		${FilteredResults}
 	Click Element		${MinimumPriceSelectionBox}
 	Click Element		${SelectMinimumPrice}
-	${miniPrice}=		Get Value		${SelectMinimumPrice}
+#	${miniPrice}=		Get Value		${SelectMinimumPrice}
+
 	Wait Until Element Is Visible		${FilteredResults}
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s
 	Click Element		${MaximumPriceSelectionBox}
 	Click Element		${SelectMaximumPrice}
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
+
+Verify Price According to Selected Minimum And Maximum Price Range
+	${miniPrice}=		Get Value		${SelectMinimumPrice}
 	${maxiPrice}=		Get Value		${SelectMaximumPrice}
 	Wait Until Element Is Visible		${FilteredResults}
 	: FOR	${pageNumber}		IN RANGE		1000	
