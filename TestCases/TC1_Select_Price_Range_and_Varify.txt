@@ -38,21 +38,7 @@ Select Price Range For Samsung And Verify Price According to Selected Price Rang
 	\	Wait Until Element is visible		${FilteredResults}
 	\	${pageNumber}=		Evaluate		${pageNumber}+1
 
-*** Keywords ***
-Verify Price According to Selected Price Range
-	[Arguments]		${miniPrice}		${maxiPrice}			
-	${totalResults}=		Get Element Count		${FilteredResults}	
-	: For		${singleResultNum}		IN RANGE		2		${totalResults}+1
-	\	${resultNumber}=		Convert To String		${singleResultNum}
-	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		NUM		${resultNumber}
-	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		NUM		${resultNumber}
-	\	${price}=		Get Text		${DisplayedPrice}
-	\	${price}=		Get Substring		${price}		1
-	\	${price}=		Remove String		${price}		,
-	\	Should Be True		${miniPrice}<=${price}
-	\	Should Be True		${maxiPrice}>=${price}
-	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
-	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
+
 	
 	
 	
