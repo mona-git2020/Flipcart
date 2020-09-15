@@ -21,8 +21,6 @@ Select Samsung From Electronics Toolbar And Select Maximum & Minimum Price From 
 	Wait Until Element Is Visible		${FilteredResults}
 	Click Element		${MinimumPriceSelectionBox}
 	Click Element		${SelectMinimumPrice}
-#	${miniPrice}=		Get Value		${SelectMinimumPrice}
-
 	Wait Until Element Is Visible		${FilteredResults}
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s
 	Click Element		${MaximumPriceSelectionBox}

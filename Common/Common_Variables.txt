@@ -1,10 +1,10 @@
 *** Variables ***
-${LoginBox}=		css=div[class="_2ISNhP _3AOFWO"]
-${LoginCrossButton}=		css=button[class="_2AkmmA _29YdH8"]
+${LoginBox}=			css=div[class="_2ISNhP _3AOFWO"]
+${LoginCrossButton}=	css=button[class="_2AkmmA _29YdH8"]
 ${ToolbarButtons}=		css=span[class="_2FZd5H"]
 ${ElectronicsToolbarButton}=		css=span[class='_2FZd5H']:nth-child(1)
 ${SamsungLink}=			css=a[title="Samsung"]
-${Results}=		css=div[class="_2kSfQ4"]
+${Results}=				css=div[class="_2kSfQ4"]
 ${ViewAllButton}=		css=div[class="_3e7xtJ"] div[class="bhgxx2 col-12-12"]:nth-child(1) div[class="_2rQIn7"]
 ${FiltersSection}=		css=div[class="_1YuAuf"]	
 ${FilteredResults}=		css=a[class="_31qSD5"]
