@@ -16,4 +16,10 @@ ${SelectMaximumPrice}=			css=div[class="_1YoBfV"] option[value="10000"]
 ${NextButton}=			Link=NEXT
 ${SingleFilteredResult}=		css=div[class*="HmYoV"] div[class*="bhgxx"]:nth-child(NUM) a[class*="qSD"]
 ${DisplayedPrice}=		css=div[class*="HmYoV"] div[class*="bhgxx"]:nth-child(NUM) a[class*="qSD"] div[class*="rQ-NK"]
-	
+${MobilesLink}=			css=a[title="Mobiles"]
+${PopularityHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(2)
+${PriceLowToHighHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(3)
+${PriceHighToLowHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(4)
+${NewestHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(5)
+${SelectedHeaderLink}=		css=div[class*="ywJNQ"] div[class*="_1xHtJz xufquN"]
+

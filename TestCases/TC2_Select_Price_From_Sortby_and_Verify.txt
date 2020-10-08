@@ -1,0 +1,98 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Flipcart
+Suite Teardown	Close Browser
+
+*** Test Cases ***
+Select Mobile Section From Electronics Toolbar
+	${statusLoginBox}=		Run Keyword And Return Status		Element Should Be Visible		${LoginBox}
+	Run Keyword If		${statusLoginBox}==True			Click Element		${LoginCrossButton}
+	Wait Until Element Is Visible		${ToolbarButtons}		timeout=15s
+	Mouse Over			${ElectronicsToolbarButton}
+	Wait Until Element Is Visible		${MobilesLink}		timeout=15s
+	Click Element		${MobilesLink}	
+	Wait Until Element Is Visible		${MobilesLink}		timeout=15s
+	Click Element		${MobilesLink}	
+	Wait Until Element Is Visible		${FilteredResults}		timeout=15s
+	
+Select Popularity Filter Under Sort By From Mobiles Link
+	${popularityValue}=		Get Text		${PopularityHeaderLink}
+	Click Element		${PopularityHeaderLink}	
+	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
+	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
+	Element Should Contain		${SelectedHeaderLink}		${popularityValue}
+	Verify Price According To Sort By For All Pages		${popularityValue}
+
+Select Low To High Price Filter Under Sort By From Mobiles Link
+	${lowToHighValue}=		Get Text		${PriceLowToHighHeaderLink}
+	Click Element		${PriceLowToHighHeaderLink}	
+	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
+	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
+	Element Should Contain		${SelectedHeaderLink}		${lowToHighValue}
+	Verify Price According To Sort By For All Pages		${lowToHighValue}
+
+Select High To Low Price Filter Under Sort By From Mobiles Link
+	${hghToLowValue}=		Get Text		${PriceHighToLowHeaderLink}
+	Click Element		${PriceHighToLowHeaderLink}	
+	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
+	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
+	Element Should Contain		${SelectedHeaderLink}		${hghToLowValue}
+	Verify Price According To Sort By For All Pages		${hghToLowValue}
+
+Select Newest First Filter Under Sort By From Mobiles Link
+	${newestFirstValue}=		Get Text		${NewestHeaderLink}
+	Click Element		${NewestHeaderLink}	
+	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
+	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
+	Element Should Contain		${SelectedHeaderLink}		${newestFirstValue}
+	Verify Price According To Sort By For All Pages		${newestFirstValue}
+	
+*** Keywords ***
+Verify Price According To Sort By For All Pages
+	[Arguments]		${linkValue}
+	: FOR	${pageNumber}		IN RANGE		1000	
+	\	Verify Sort By Price For Single Page		${linkValue}
+	\	${statusNextButton}=		Run Keyword And Return Status		Element Should Be Visible		${NextButton}
+	\	Run Keyword If		${statusNextButton}==True		Click Element		${NextButton}
+	\	...			ELSE		Exit For Loop
+	\	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
+	\	Wait Until Element is visible		${FilteredResults}
+	\	${pageNumber}=		Evaluate		${pageNumber}+1
+	
+Verify Sort By Price For Single Page
+	[Arguments]		${linkValue}
+	${totalResults}=		Get Element Count		${FilteredResults}	
+	: For		${singleResultNum}		IN RANGE		2		${totalResults}+1
+	\	${resultNumber}=		Convert To String		${singleResultNum}
+	\	${SingleFilteredResultNew}=	Replace String		${SingleFilteredResult}		NUM		${resultNumber}
+	\	${CurrentPrice}=	Replace String		${DisplayedPrice}		NUM		${resultNumber}
+	\	${currentValue}=		Get Text		${CurrentPrice}
+	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
+	\	${DisplayedPrice}=		Replace String		${DisplayedPrice}		${resultNumber}		NUM
+	\	${currentValue}=		Get Substring		${currentValue}		1
+	\	${currentValue}=		Remove String		${currentValue}		,
+	\	${previousResultNum}=		Evaluate		${singleResultNum}-1
+	\	Continue For Loop If		${previousResultNum}==1
+	\	${resultNumber}=		Convert To String		${previousResultNum}
+	\	${PreviousPrice}=	Replace String		${DisplayedPrice}		NUM		${resultNumber}
+	\	${previousValue}=		Get Text		${PreviousPrice}
+	\	${previousValue}=		Get Substring		${previousValue}		1
+	\	${previousValue}=		Remove String		${previousValue}		,
+	\	${statusPopularity}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Popularity
+	\	${statusPriceLowHigh}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Low to High
+	\	${statusPriceHighLow}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		High to Low
+	\	${statusNewest}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Newest First	
+	\	Run Keyword If		${statusPopularity}==True or ${statusNewest}==True		Element Should Be Visible		${SingleFilteredResultNew}		
+	\	Run Keyword If		${statusPriceLowHigh}==True		Should Be True		${previousValue}<=${currentValue}
+	\	Run Keyword If		${statusPriceHighLow}==True		Should Be True		${previousValue}>=${currentValue}
+	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
+	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
+
+
+
+
+	
