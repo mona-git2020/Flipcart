@@ -54,7 +54,7 @@ Select Newest First Filter Under Sort By From Mobiles Link
 *** Keywords ***
 Verify Price According To Sort By For All Pages
 	[Arguments]		${linkValue}
-	: FOR	${pageNumber}		IN RANGE		1000	
+	: FOR	${pageNumber}		IN RANGE		1		11	
 	\	Verify Sort By Price For Single Page		${linkValue}
 	\	${statusNextButton}=		Run Keyword And Return Status		Element Should Be Visible		${NextButton}
 	\	Run Keyword If		${statusNextButton}==True		Click Element		${NextButton}
