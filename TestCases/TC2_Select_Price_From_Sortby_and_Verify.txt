@@ -15,54 +15,43 @@ Select Mobile Section From Electronics Toolbar
 	Mouse Over			${ElectronicsToolbarButton}
 	Wait Until Element Is Visible		${MobilesLink}		timeout=15s
 	Click Element		${MobilesLink}	
-	Wait Until Element Is Visible		${MobilesLink}		timeout=15s
-	Click Element		${MobilesLink}	
+	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${MobilesLink}		timeout=15s
+	Run Keyword If		${status}==False		Run Keywords		Click Element			${ElectronicsToolbarButton}		AND		Wait Until Element Is Visible		${MobileAccessoriesLink}		timeout=5s		AND		Click Element		${MobileAccessoriesLink}	AND		Wait Until Element Is Visible		${Mobile&AccessoriesLink}		timeout=15s		AND			Click Element		${Mobile&AccessoriesLink}		AND			Wait Until Element Is Visible		${MobilesLink}		timeout=15s			AND		Click Element		${MobilesLink}	
 	Wait Until Element Is Visible		${FilteredResults}		timeout=15s
 	
-Select Popularity Filter Under Sort By From Mobiles Link
+Select Popularity Filter Under Sort By From Mobiles Section
 	${popularityValue}=		Get Text		${PopularityHeaderLink}
 	Click Element		${PopularityHeaderLink}	
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
 	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
 	Element Should Contain		${SelectedHeaderLink}		${popularityValue}
-	Verify Price According To Sort By For All Pages		${popularityValue}
+	Verify Sort By Price For Single Page		${popularityValue}
 
-Select Low To High Price Filter Under Sort By From Mobiles Link
+Select Low To High Price Filter Under Sort By From Mobiles Section
 	${lowToHighValue}=		Get Text		${PriceLowToHighHeaderLink}
 	Click Element		${PriceLowToHighHeaderLink}	
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
 	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
 	Element Should Contain		${SelectedHeaderLink}		${lowToHighValue}
-	Verify Price According To Sort By For All Pages		${lowToHighValue}
+	Verify Sort By Price For Single Page		${lowToHighValue}
 
-Select High To Low Price Filter Under Sort By From Mobiles Link
+Select High To Low Price Filter Under Sort By From Mobiles Section
 	${hghToLowValue}=		Get Text		${PriceHighToLowHeaderLink}
 	Click Element		${PriceHighToLowHeaderLink}	
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
 	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
 	Element Should Contain		${SelectedHeaderLink}		${hghToLowValue}
-	Verify Price According To Sort By For All Pages		${hghToLowValue}
+	Verify Sort By Price For Single Page		${hghToLowValue}
 
-Select Newest First Filter Under Sort By From Mobiles Link
+Select Newest First Filter Under Sort By From Mobiles Section
 	${newestFirstValue}=		Get Text		${NewestHeaderLink}
 	Click Element		${NewestHeaderLink}	
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=5s	
 	Wait Until Element Is Visible		${FilteredResults}		timeout=5s
 	Element Should Contain		${SelectedHeaderLink}		${newestFirstValue}
-	Verify Price According To Sort By For All Pages		${newestFirstValue}
+	Verify Sort By Price For Single Page		${newestFirstValue}
 	
 *** Keywords ***
-Verify Price According To Sort By For All Pages
-	[Arguments]		${linkValue}
-	: FOR	${pageNumber}		IN RANGE		1		11	
-	\	Verify Sort By Price For Single Page		${linkValue}
-	\	${statusNextButton}=		Run Keyword And Return Status		Element Should Be Visible		${NextButton}
-	\	Run Keyword If		${statusNextButton}==True		Click Element		${NextButton}
-	\	...			ELSE		Exit For Loop
-	\	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
-	\	Wait Until Element is visible		${FilteredResults}
-	\	${pageNumber}=		Evaluate		${pageNumber}+1
-	
 Verify Sort By Price For Single Page
 	[Arguments]		${linkValue}
 	${totalResults}=		Get Element Count		${FilteredResults}	
@@ -91,8 +80,3 @@ Verify Sort By Price For Single Page
 	\	Run Keyword If		${statusPriceHighLow}==True		Should Be True		${previousValue}>=${currentValue}
 	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
 	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
-
-
-
-
-	

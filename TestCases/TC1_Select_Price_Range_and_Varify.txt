@@ -15,33 +15,30 @@ Select Samsung From Electronics Toolbar And Select Maximum & Minimum Price From 
 	Mouse Over			${ElectronicsToolbarButton}
 	Wait Until Element Is Visible		${SamsungLink}
 	Click Element		${SamsungLink}	
-	Wait Until Element Is Visible		${Results}		timeout=15s
 	Wait Until Element Is Visible		${ViewAllButton}		timeout=30s
 	Click Element		${ViewAllButton}
 	Wait Until Element Is Visible		${FilteredResults}
 	Click Element		${MinimumPriceSelectionBox}
 	Click Element		${SelectMinimumPrice}
-	Wait Until Element Is Visible		${FilteredResults}
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s
 	Click Element		${MaximumPriceSelectionBox}
 	Click Element		${SelectMaximumPrice}
 	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
 
-Verify Price According to Selected Minimum And Maximum Price Range
+Verify Price According To Selected Minimum And Maximum Price Range
 	${miniPrice}=		Get Value		${SelectMinimumPrice}
 	${maxiPrice}=		Get Value		${SelectMaximumPrice}
 	Wait Until Element Is Visible		${FilteredResults}
-	: FOR	${pageNumber}		IN RANGE		1000	
-	\	Verify Price According to Selected Price Range		${miniPrice}		${maxiPrice}
+	: FOR	${pageNumber}		IN RANGE		1		5	
+	\	Verify Price According To Selected Price Range		${miniPrice}		${maxiPrice}
 	\	${statusNextButton}=		Run Keyword And Return Status		Element Should Be Visible		${NextButton}
 	\	Run Keyword If		${statusNextButton}==True		Click Element		${NextButton}
 	\	...			ELSE		Exit For Loop
 	\	Wait Until Element Is Not Visible	${PageLoad}			timeout=15s	
-	\	Wait Until Element is visible		${FilteredResults}
 	\	${pageNumber}=		Evaluate		${pageNumber}+1
 
 *** Keywords ***
-Verify Price According to Selected Price Range
+Verify Price According To Selected Price Range
 	[Arguments]		${miniPrice}		${maxiPrice}			
 	${totalResults}=		Get Element Count		${FilteredResults}	
 	: For		${singleResultNum}		IN RANGE		2		${totalResults}+1
@@ -55,10 +52,3 @@ Verify Price According to Selected Price Range
 	\	Should Be True		${maxiPrice}>=${price}
 	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
 	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
-	
-	
-	
-	
-	
-	
-	
