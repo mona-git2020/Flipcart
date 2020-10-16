@@ -1,0 +1,15 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		OperatingSystem
+
+*** Test Cases ***
+Create New File, Get The Content Of That File And Verify
+	Create File		${CURDIR}${/}file1.txt		Hello, My Name Is Monalisha Prajapati. ${\n}Today is my birthday. ${\n}Thank you so much for your warm wishes.	
+	Wait Until Created		${CURDIR}${/}file1.txt		timeout=10s	
+	Should Exist		${CURDIR}${/}file1.txt
+	${file1Content}=		Get File		${CURDIR}${/}file1.txt
+	Create File		${CURDIR}${/}file2.txt		${file1Content}	
+	Wait Until Created		${CURDIR}${/}file2.txt		timeout=10s	
+	Should Exist		${CURDIR}${/}file2.txt
+	${file2Content}=		Get File		${CURDIR}${/}file2.txt
+	Should Be Equal		${file1Content}		${file2Content}
