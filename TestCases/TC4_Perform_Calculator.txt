@@ -1,0 +1,21 @@
+*** Settings ***
+Library		Selenium2Library
+Library		String
+Library		../Variables/Calculator.py
+
+*** Test Cases ***
+Perform Addition 
+	${result}=		Addition		17		11
+	
+Perform Subtraction
+	${result}=		Subtraction		13		4	
+
+Perform Multiplication
+	${result}=		Multiplication		9		7	
+
+Perform Division
+	${result}=		Division		16		5		
+	
+Perform Maths Rule
+	${value}=		Set Variable		23+34-63*76/34
+	${result}=		MathsRule		${value}
