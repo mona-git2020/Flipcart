@@ -12,11 +12,11 @@ Select Mobile Section From Electronics Toolbar
 	${statusLoginBox}=		Run Keyword And Return Status		Element Should Be Visible		${LoginBox}
 	Run Keyword If		${statusLoginBox}==True			Click Element		${LoginCrossButton}
 	Wait Until Element Is Visible		${ToolbarButtons}		timeout=15s
-	Mouse Over			${ElectronicsToolbarButton}
+	Click Element			${ElectronicsToolbarButton}
 	Wait Until Element Is Visible		${MobilesLink}		timeout=15s
 	Click Element		${MobilesLink}	
 	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${MobilesLink}		timeout=15s
-	Run Keyword If		${status}==False		Run Keywords		Click Element			${ElectronicsToolbarButton}		AND		Wait Until Element Is Visible		${MobileAccessoriesLink}		timeout=5s		AND		Click Element		${MobileAccessoriesLink}	AND		Wait Until Element Is Visible		${Mobile&AccessoriesLink}		timeout=15s		AND			Click Element		${Mobile&AccessoriesLink}		AND			Wait Until Element Is Visible		${MobilesLink}		timeout=15s			AND		Click Element		${MobilesLink}	
+	Run Keyword If		${status}==False		Run Keywords		Click Element			${ElectronicsToolbarButton}		AND		Wait Until Element Is Visible		${MobileAccessoriesLink}		timeout=15s		AND		Click Element		${MobileAccessoriesLink}	AND		Wait Until Element Is Visible		${Mobile&AccessoriesLink}		timeout=15s		AND			Click Element		${Mobile&AccessoriesLink}		AND			Wait Until Element Is Visible		${MobilesLink}		timeout=15s			AND		Click Element		${MobilesLink}	
 	Wait Until Element Is Visible		${FilteredResults}		timeout=15s
 	
 Select Popularity Filter Under Sort By From Mobiles Section

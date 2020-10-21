@@ -2,5 +2,3 @@
 Open Flipcart
 	Open Browser	${urlOfFlipcart}		${browser}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
 	Maximize Browser Window
-
-
