@@ -1,0 +1,14 @@
+*** Variables ***
+${LoadingDataDropdown}=		css=td[title="Loading Data"] span
+${JSONData}=			css=td[title="JSON Data"] span
+${ActiveTab}=			css=li[class*="tabs-active"]
+${JsonDataExampleTable}=		css=div[id="gbox_list2"]
+${InputPage}=		css=input[class="ui-pg-input"]
+${TotalPages}=		css=span[id*="pager"]
+${PagingInfo}=		css=div[class*="paging-info"]
+${JsonDataTableRows}=		css=table[id="list2"] tbody>tr
+${FirstRow}=			css=table[id="list2"] tbody>tr:nth-child(2)
+${AmountColumn}=			css=table[id*="list"] tbody>tr:nth-child(NUM) td[aria-describedby*="amount"]
+${TaxColumn}=			css=table[id*="list"] tbody>tr:nth-child(NUM) td[aria-describedby*="tax"]
+${TotalColumn}=			css=table[id*="list"] tbody>tr:nth-child(NUM) td[aria-describedby*="total"]
+${NextButton}=		css=span[class*="next"]
