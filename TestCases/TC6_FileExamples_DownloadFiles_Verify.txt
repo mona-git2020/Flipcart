@@ -1,0 +1,38 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Library		OperatingSystem
+Library		../Variables/WebElement.py
+Library		../Variables/Create_Read_File.py
+Resource	../Common/Common_Variables_FileExamples_Verify.txt
+Suite Setup		Open File Examples
+Suite Teardown	Close Browser
+
+*** Test Cases ***
+Download PPT File From File Examples 
+	Wait Until Element Is Visible		${PPTLists}
+	${totalFiles}=		Get Element Count		${PPTLists}
+	: FOR		${fileNum}		IN RANGE		1		${totalFiles}+1
+	\	${num}=		Convert To String		${fileNum}
+	\	${PptDownloadButton}=		Replace String		${PptDownloadButton}		NUM		${num}
+	\	${FileSizeColumn}=		Replace String		${FileSizeColumn}		NUM		${num}
+	\	${FileExtention}=		Replace String		${FileExtention}		NUM		${num}
+	\	${size}=		Get Text		${FileSizeColumn}
+	\	${sizeList}=		Split String		${size}		${SPACE}
+	\	${fileName}=		Set Variable		file_example_PPT_${sizeList[0]}${sizeList[1]}
+	\	${ext}=		Get Text		${FileExtention}
+	\	Click Element		${PptDownloadButton}
+	\	Wait Until Created			C:/Users/AMAN/Downloads/${fileName}.${ext}			timeout=90s
+	\	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/${fileName}.${ext}
+	\	${file_content}=		open_and_read_file		C:/Users/AMAN/Downloads/${fileName}.${ext}		 
+	\	${PptDownloadButton}=		Replace String		${PptDownloadButton}		${num}		NUM
+	\	${FileSizeColumn}=		Replace String		${FileSizeColumn}		${num}		NUM
+	\	${FileExtention}=		Replace String		${FileExtention}		${num}		NUM
+	
+
+*** Keywords ***
+Open File Examples
+	${profile}=		create_ff_profile		${profileAddress}
+	Open Browser	${urlOfFileExample}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Maximize Browser Window

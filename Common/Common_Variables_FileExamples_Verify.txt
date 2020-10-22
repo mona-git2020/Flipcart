@@ -1,0 +1,5 @@
+*** Variables ***
+${PPTLists}=		css=table[id*="table"] tbody tr
+${PptDownloadButton}=		css=table[id*="table"] tbody tr:nth-child(NUM) a[class*="download"]
+${FileSizeColumn}=		css=table[id*="table"] tbody tr:nth-child(NUM) td[class*="file-ext"]
+${FileExtention}=		css=table[id*="table"] tbody tr:nth-child(NUM) td:nth-child(4)
