@@ -1,0 +1,12 @@
+*** Variables ***
+${ComposeButton}=		css=button[class*="33rLSYbzxvhXjgYTwfjWQI"]
+${AttachImageButton}=		css=img[src*="attach.svg"]
+${LabelAttachmentsOutlook}=		css=div[aria-label="attachments"]
+${BrowseThisComputerButton}=		css=button[name="Browse this computer"]
+${AttachmentsFolderOnedrive}=		css=button[title="Attachments"]
+${AttachmentsFilesList}=		css=div[class*="ms-DetailsList-content"]
+${ArrowEmailTitle}=		css=div[class="tile-container"]
+${ArrowEnterEmailID}=		css=input[type="email"]
+${ArrowEnterPassword}=		css=input[type="password"]
+${SignInButton}=		css=input[value="Sign in"]
+${SignInNextButton}=		css=input[type="submit"]

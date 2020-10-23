@@ -1,0 +1,1 @@
+urlOfOutlook = "https://outlook.office.com/"
