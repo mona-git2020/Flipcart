@@ -2,3 +2,5 @@ urlOfFileExample = "https://file-examples.com/index.php/sample-documents-downloa
 
 profileAddress = "C:/Users/AMAN/AppData/Roaming/Mozilla/Firefox/Profiles/90yqdr7b.default"
 downloadDir = "D:/MONU/Robotframework/Intranet/Downloads"
+
+downloadFolder = "C:/Users/AMAN/Downloads"

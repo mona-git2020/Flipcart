@@ -8,24 +8,33 @@ def create_new_file(file_name, content):
 	file_Content = file.read()
 	return file_Content
 	
-def open_and_read_file(file_name):
+def convert_file_into_pptx(file_name):	
 	PptApp = win32com.client.Dispatch("Powerpoint.Application")
-    PptApp.Visible = True
-    PPtPresentation = PptApp.Presentations.Open(file_name, "r")
-    PPtPresentation.SaveAs(file_name+"x", 24)
-    PPtPresentation.close()
-    PptApp.Quit()
-	print("hey")
-	file = open(file_name, "r")
-	print("hey.....Hi...")
+	PptApp.Visible = True
+	PPtPresentation = PptApp.Presentations.Open(file_name)
+	PPtPresentation.SaveAs(file_name+"x", 24)
+	PPtPresentation.close()
+	PptApp.Quit()
+	
+def open_and_read_file(file_name):
+	file = open(file_name,"rb")
 	prs = Presentation(file)
-	print("hey.....Hi...I m Good....")
-	fileDataList = []
-	print(fileDataList)
+	fileDict = {}
 	for slide in prs.slides:
-		print("First For Loop")
-		for shape in slide.shapes:
-			print("First For Loop")
-			print(shape.text)
-			fileDataList.append(shape.text)
-	return fileDataList			
+		slideList = []
+		for shape in slide.shapes:			
+			if shape.has_text_frame:
+				if shape.text=='Chart':
+					continue
+				if shape.text=='Table':
+					continue
+				if shape.text=='Photo':
+					continue
+				slideList.append(shape.text)
+		print(slideList)		
+		if slideList==[]:
+			continue
+		else:
+			fileDict[slideList[0]] = slideList[1]
+		print(fileDict)	
+	return fileDict			

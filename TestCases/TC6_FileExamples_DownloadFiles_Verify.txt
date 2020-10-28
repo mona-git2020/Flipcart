@@ -23,16 +23,21 @@ Download PPT File From File Examples
 	\	${fileName}=		Set Variable		file_example_PPT_${sizeList[0]}${sizeList[1]}
 	\	${ext}=		Get Text		${FileExtention}
 	\	Click Element		${PptDownloadButton}
-	\	Wait Until Created			C:/Users/AMAN/Downloads/${fileName}.${ext}			timeout=90s
-	\	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/${fileName}.${ext}
-	\	${file_content}=		open_and_read_file		C:/Users/AMAN/Downloads/${fileName}.${ext}		 
+	\	Sleep		20s
 	\	${PptDownloadButton}=		Replace String		${PptDownloadButton}		${num}		NUM
 	\	${FileSizeColumn}=		Replace String		${FileSizeColumn}		${num}		NUM
 	\	${FileExtention}=		Replace String		${FileExtention}		${num}		NUM
+	\	Wait Until Created			${downloadFolder}/${fileName}.${ext}			timeout=90s
+	\	${status}=		Run Keyword And Return Status		File Should Exist		${downloadFolder}/${fileName}.${ext}
+	\	convert_file_into_pptx		${downloadFolder}/${fileName}.${ext}
+	\	${file_content}=		open_and_read_file			${downloadFolder}/${fileName}.${ext}x
+	\	${keys}=		Get Dictionary Keys		${file_content}
+	\	${status}=		Run Keyword If		${keys}==[]			Continue For Loop
+	\	...		ELSE		Run Keyword And Return Status		Should Contain		${file_content["${keys[0]}"]}			${keys[0]}
 	
 
 *** Keywords ***
 Open File Examples
 	${profile}=		create_ff_profile		${profileAddress}
-	Open Browser	${urlOfFileExample}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Open Browser	${urlOfFileExample}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.137.1:4444/wd/hub		#desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
 	Maximize Browser Window
