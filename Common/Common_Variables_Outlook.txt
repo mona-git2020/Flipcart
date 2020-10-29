@@ -10,3 +10,5 @@ ${ArrowEnterEmailID}=		css=input[type="email"]
 ${ArrowEnterPassword}=		css=input[type="password"]
 ${SignInButton}=		css=input[value="Sign in"]
 ${SignInNextButton}=		css=input[type="submit"]
+${PHPTravelsFileFromAttachment}=		css=button[title*="PHPTravels_TestCases.xlsx"]
+${SelectFileFromSuggestions}=		css=li[class*="ms-ContextualMenu-item"]:nth-child(3)>button

@@ -3,14 +3,28 @@ Library		Selenium2Library
 Library		String
 Library		Collections	
 Library		OperatingSystem
-Library		../Variables/WebElement.py
-Library		../Variables/Create_Read_File.py
 Resource	../Common/Common_Variables_Outlook.txt
-Suite Setup		Open Outlook
+Suite Setup		Open Outlook And SignIn Into Account
 Suite Teardown		Close Browser
 
 *** Test Cases ***
-Compose Mail And Upload File
+Compose Mail From Outlook
+	${statusOutlook}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ComposeButton}		timeout=90s
+	Click Element		${ComposeButton}
+	Wait Until Element Is Visible		${AttachImageButton}		timeout=90s
+	Click Element		${AttachImageButton}	
+	
+Select File From Suggestions And Verify Uploaded File	
+	Wait Until Element Is Visible		${SelectFileFromSuggestions}		timeout=20s
+	${fileName}=		Get Element Attribute		${SelectFileFromSuggestions}		name
+	Click Element		${SelectFileFromSuggestions}	
+	Wait Until Element Is Visible		${LabelAttachmentsOutlook}		timeout=25s
+	Element Should Contain		${LabelAttachmentsOutlook}		${fileName}			
+	
+*** Keywords ***
+Open Outlook And SignIn Into Account
+	Open Browser	${urlOfOutlook}		${browser}		remote_url=http://192.168.137.1:4444/wd/hub		
+	Maximize Browser Window
 	${statusSignIn}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ArrowEnterEmailID}		timeout=25s
 	Run Keyword If		${statusSignIn}==True		Run Keywords		Input Text		${ArrowEnterEmailID}		${arrowEmailId}		AND		
 	...			Click Element		${SignInNextButton}		AND		
@@ -19,17 +33,3 @@ Compose Mail And Upload File
 	...			Click Element		${SignInButton}		AND
 	...			Wait Until Page Contains		Stay signed in?		timeout=20s		AND
 	...			Click Element		${SignInNextButton}
-	${statusOutlook}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ComposeButton}		timeout=90s
-	Click Element		${ComposeButton}
-	Wait Until Element Is Visible		${AttachImageButton}		timeout=30s
-	Click Element		${AttachImageButton}	
-	Wait Until Element Is Visible		${BrowseThisComputerButton}		timeout=20s
-	Click Element		${BrowseThisComputerButton}	
-	Choose File			${AttachImageButton}			D:/MONU/Automation.txt
-	Wait Until Element Is Visible		${LabelAttachmentsOutlook}		timeout=25s
-	Element Should Contain		${LabelAttachmentsOutlook}			
-	
-*** Keywords ***
-Open Outlook
-	Open Browser	${urlOfOutlook}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
-	Maximize Browser Window
