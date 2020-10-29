@@ -1,7 +1,6 @@
 *** Settings ***
 Library		Selenium2Library
 Library		../../Variables/Create_Read_File.py
-
 *** Test Cases ***
 Create New File, Get The Content Of That File And Verify
 	${file1_content}=		create_new_file		PythonFile1.txt		 ${fileContent}

@@ -1,0 +1,26 @@
+*** Variables ***
+${LoginBox}=			css=div[class="_2ISNhP _3AOFWO"]
+${LoginCrossButton}=	css=button[class="_2AkmmA _29YdH8"]
+${ToolbarButtons}=		css=span[class="_2FZd5H"]
+${ElectronicsToolbarButton}=		css=span[class='_2FZd5H']:nth-child(1)
+${SamsungLink}=			css=a[title="Samsung"]
+${Results}=				css=div[class="_2kSfQ4"]
+${ViewAllButton}=		css=div[class="_3e7xtJ"] div[class="bhgxx2 col-12-12"]:nth-child(1) div[class="_2rQIn7"]
+${FiltersSection}=		css=div[class="_1YuAuf"]	
+${FilteredResults}=		css=a[class="_31qSD5"]
+${MinimumPriceSelectionBox}=	css=div[class="_1qKb_B"]	
+${MaximumPriceSelectionBox}=	css=div[class="_1YoBfV"]	
+${PageLoad}=			css=div[class="_9TXcbt"]
+${SelectMinimumPrice}=			css=div[class="_1qKb_B"] option[value="2000"]
+${SelectMaximumPrice}=			css=div[class="_1YoBfV"] option[value="10000"]
+${NextButton}=			Link=NEXT
+${SingleFilteredResult}=		css=div[class*="HmYoV"] div[class*="bhgxx"]:nth-child(NUM) a[class*="qSD"]
+${DisplayedPrice}=		css=div[class*="HmYoV"] div[class*="bhgxx"]:nth-child(NUM) a[class*="qSD"] div[class*="rQ-NK"]
+${MobilesLink}=			css=a[title="Mobiles"]
+${MobileAccessoriesLink}		css=a[title="Mobile Accessories"]
+${Mobile&AccessoriesLink}		css=a[title="Mobiles & Accessories"]
+${PopularityHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(2)
+${PriceLowToHighHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(3)
+${PriceHighToLowHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(4)
+${NewestHeaderLink}=		css=div[class*="ywJNQ"] div[class*="xHtJz"]:nth-child(5)
+${SelectedHeaderLink}=		css=div[class*="ywJNQ"] div[class*="_1xHtJz xufquN"]
