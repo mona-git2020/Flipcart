@@ -38,5 +38,5 @@ Download PPT File From File Examples
 *** Keywords ***
 Open File Examples
 	${profile}=		create_ff_profile		${profileAddress}
-	Open Browser	${urlOfFileExample}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.137.1:4444/wd/hub		
+	Open Browser	${urlOfFileExample}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.0.104:4444/wd/hub		
 	Maximize Browser Window

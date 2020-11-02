@@ -1,4 +1,4 @@
 *** Keywords ***
 Open JqGrid
-	Open Browser	${urlOFJqgrid}		${browser}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Open Browser	${urlOFJqgrid}		${browser}		remote_url=http://192.168.0.104:4444/wd/hub		
 	Maximize Browser Window

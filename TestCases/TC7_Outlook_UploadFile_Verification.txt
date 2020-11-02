@@ -3,6 +3,7 @@ Library		Selenium2Library
 Library		String
 Library		Collections	
 Library		OperatingSystem
+Library		../Variables/OutlookAttachFile.py
 Resource	../Common/Common_Variables_Outlook.txt
 Suite Setup		Open Outlook And SignIn Into Account
 Suite Teardown		Close Browser
@@ -15,15 +16,15 @@ Compose Mail From Outlook
 	Click Element		${AttachImageButton}	
 	
 Select File From Suggestions And Verify Uploaded File	
-	Wait Until Element Is Visible		${SelectFileFromSuggestions}		timeout=20s
-	${fileName}=		Get Element Attribute		${SelectFileFromSuggestions}		name
-	Click Element		${SelectFileFromSuggestions}	
+	Wait Until Element Is Visible		${BrowseThisComputerButton}		timeout=20s
+	Click Element		${BrowseThisComputerButton}	
+	select_file_from_window		${fileLocation}
 	Wait Until Element Is Visible		${LabelAttachmentsOutlook}		timeout=25s
-	Element Should Contain		${LabelAttachmentsOutlook}		${fileName}			
+	Element Should Contain		${LabelAttachmentsOutlook}		${fileLocation}			
 	
 *** Keywords ***
 Open Outlook And SignIn Into Account
-	Open Browser	${urlOfOutlook}		${browser}		remote_url=http://192.168.137.1:4444/wd/hub		
+	Open Browser	${urlOfOutlook}		${browser}		remote_url=http://192.168.0.104:4444/wd/hub		
 	Maximize Browser Window
 	${statusSignIn}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ArrowEnterEmailID}		timeout=25s
 	Run Keyword If		${statusSignIn}==True		Run Keywords		Input Text		${ArrowEnterEmailID}		${arrowEmailId}		AND		
