@@ -22,7 +22,7 @@ Verify Amount, Tax And Total Of Amount & Tax From Json Data Example Table For Al
 	
 *** Keywords ***
 Open JqGrid
-	Open Browser	${urlOFJqgrid}		${browser}		remote_url=http://192.168.0.104:4444/wd/hub	
+	Open Browser	${urlOFJqgrid}		${browser}		remote_url=${remote_url}	
 	Maximize Browser Window
 	
 Verify Total Amount For All Pages	

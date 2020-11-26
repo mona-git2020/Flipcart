@@ -2,6 +2,7 @@
 Library		Selenium2Library	
 Library		String
 Library		Collections	
+Library		OperatingSystem	
 Resource	../Common/Common_Variables_Flipkart.txt
 Resource	../Common/Keywords_Flipkart.txt	
 Suite Setup		Open Flipcart

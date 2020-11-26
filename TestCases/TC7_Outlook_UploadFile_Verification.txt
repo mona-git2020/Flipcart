@@ -24,8 +24,11 @@ Select File From Suggestions And Verify Uploaded File
 	
 *** Keywords ***
 Open Outlook And SignIn Into Account
-	Open Browser	${urlOfOutlook}		${browser}		remote_url=http://192.168.0.104:4444/wd/hub		
+	Open Browser	${urlOfOutlook}		${browser}		remote_url=${remote_url}		
 	Maximize Browser Window
+	${PickAnAccountFromList}=		Replace String		${PickAnAccountFromList}		ARROWEMAILID		${arrowEmailId}	
+	${statusPickAnAccount}=		Run Keyword And Return Status		Wait Until Element Is Visible		${PickAnAccountFromList}		timeout=25s
+	Run Keyword If		${statusPickAnAccount}==True		Click Element		${PickAnAccountFromList}
 	${statusSignIn}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ArrowEnterEmailID}		timeout=25s
 	Run Keyword If		${statusSignIn}==True		Run Keywords		Input Text		${ArrowEnterEmailID}		${arrowEmailId}		AND		
 	...			Click Element		${SignInNextButton}		AND		
