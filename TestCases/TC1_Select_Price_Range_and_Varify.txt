@@ -30,7 +30,9 @@ Verify Price According To Selected Minimum And Maximum Price Range
 	${miniPrice}=		Get Value		${SelectMinimumPrice}
 	${maxiPrice}=		Get Value		${SelectMaximumPrice}
 	Wait Until Element Is Visible		${FilteredResults}
-	${totalResults}=		Get Element Count		${FilteredResults}	
+	${totalResults}=		Get Element Count		${FilteredResults}
+	${totalResults}=		Run Keyword If		${totalResults}>=15		Set Variable		15
+	...		ELSE		Set Variable		${totalResults}			
 	: For		${singleResultNum}		IN RANGE		2		${totalResults}+1
 	\	${resultNumber}=		Convert To String		${singleResultNum}
 	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		NUM		${resultNumber}

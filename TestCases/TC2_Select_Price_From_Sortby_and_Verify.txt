@@ -54,13 +54,18 @@ Select Newest First Filter Under Sort By From Mobiles Section
 *** Keywords ***
 Verify Sort By Price For Single Page
 	[Arguments]		${linkValue}
-	${totalResults}=		Get Element Count		${FilteredResults}	
+	${totalResults}=		Get Element Count		${FilteredResults}
+	${totalResults}=		Run Keyword If		${totalResults}>=15		Set Variable		15
+	...		ELSE		Set Variable		${totalResults}			
 	: For		${singleResultNum}		IN RANGE		2		${totalResults}+1
 	\	${resultNumber}=		Convert To String		${singleResultNum}
 	\	${SingleFilteredResultNew}=	Replace String		${SingleFilteredResult}		NUM		${resultNumber}
+	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
+	\	${statusPopularity}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Popularity
+	\	${statusNewest}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Newest First	
+	\	Run Keyword If		${statusPopularity}==True or ${statusNewest}==True		Run Keywords	Element Should Be Visible		${SingleFilteredResultNew}	AND	Continue For Loop		
 	\	${CurrentPrice}=	Replace String		${DisplayedPrice}		NUM		${resultNumber}
 	\	${currentValue}=		Get Text		${CurrentPrice}
-	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
 	\	${DisplayedPrice}=		Replace String		${DisplayedPrice}		${resultNumber}		NUM
 	\	${currentValue}=		Get Substring		${currentValue}		1
 	\	${currentValue}=		Remove String		${currentValue}		,
@@ -69,14 +74,10 @@ Verify Sort By Price For Single Page
 	\	${resultNumber}=		Convert To String		${previousResultNum}
 	\	${PreviousPrice}=	Replace String		${DisplayedPrice}		NUM		${resultNumber}
 	\	${previousValue}=		Get Text		${PreviousPrice}
+	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
 	\	${previousValue}=		Get Substring		${previousValue}		1
 	\	${previousValue}=		Remove String		${previousValue}		,
-	\	${statusPopularity}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Popularity
 	\	${statusPriceLowHigh}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Low to High
+	\	Run Keyword If		${statusPriceLowHigh}==True		Run Keywords		Should Be True		${previousValue}<=${currentValue}	AND	Continue For Loop
 	\	${statusPriceHighLow}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		High to Low
-	\	${statusNewest}=		Run Keyword And Return Status		Element Should Contain		${SelectedHeaderLink}		Newest First	
-	\	Run Keyword If		${statusPopularity}==True or ${statusNewest}==True		Element Should Be Visible		${SingleFilteredResultNew}		
-	\	Run Keyword If		${statusPriceLowHigh}==True		Should Be True		${previousValue}<=${currentValue}
 	\	Run Keyword If		${statusPriceHighLow}==True		Should Be True		${previousValue}>=${currentValue}
-	\	${SingleFilteredResult}=	Replace String		${SingleFilteredResult}		${resultNumber}		NUM
-	\	${DisplayedPrice}=	Replace String		${DisplayedPrice}		${resultNumber}		NUM
