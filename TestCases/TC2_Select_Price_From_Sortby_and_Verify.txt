@@ -17,6 +17,7 @@ Select Mobile Section From Electronics Toolbar
 	Click Element		${MobilesLink}	
 	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${MobilesLink}		timeout=15s
 	Run Keyword If		${status}==False		Run Keywords		Mouse Over			${ElectronicsToolbarButton}		AND		Wait Until Element Is Visible		${MobileAccessoriesLink}		timeout=15s		AND		Click Element		${MobileAccessoriesLink}	AND		Wait Until Element Is Visible		${Mobile&AccessoriesLink}		timeout=15s		AND			Click Element		${Mobile&AccessoriesLink}		AND			Wait Until Element Is Visible		${MobilesLink}		timeout=15s			AND		Click Element		${MobilesLink}	
+	Click Element		${MobilesLink}
 	Wait Until Element Is Visible		${FilteredResults}		timeout=15s
 	
 Select Popularity Filter Under Sort By From Mobiles Section
