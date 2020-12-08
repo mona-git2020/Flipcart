@@ -1,0 +1,9 @@
+*** Settings ***
+Library		Selenium2Library
+Library		../Variables/SetLibraryCustomKeywordFile1.py
+Library		../Variables/SetLibraryCustomKeywordFile2.py
+
+*** Test Cases ***
+Get Custom Keyword From Python File 
+	Set Library Search Order		SetLibraryCustomKeywordFile2		SetLibraryCustomKeywordFile1
+	${result}=		Mathematics			12		7
