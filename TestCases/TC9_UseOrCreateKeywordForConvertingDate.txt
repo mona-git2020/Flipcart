@@ -1,0 +1,181 @@
+*** Settings ***
+Library		Selenium2Library
+Library		DateTime
+
+*** Test Cases ***
+Convert One Date Format Into Another Date Format
+	${covertedDate}=		Convert Actual Date Format Into Expected Date Format		${dateFormat}		${expectedDateFormat}		
+	Log		${covertedDate}
+
+*** Keywords ***
+Convert Actual Date Format Into Expected Date Format
+	[Arguments]		${firstDate}		${secondDate}
+	${dateFormatStatus1}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%b %d, %Y	
+	${dateFormatStatus2}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%d-%m-%Y	
+	${dateFormatStatus3}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%d/%m/%Y	
+	${dateFormatStatus4}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%Y/%m/%d		
+	${dateFormatStatus5}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%Y-%m-%d		
+	${dateFormatStatus6}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%d %b, %Y		
+	${dateFormatStatus7}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%Y, %b %d		
+	${dateFormatStatus8}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%B %d, %Y		
+	${dateFormatStatus9}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%d %B, %Y		
+	${dateFormatStatus10}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%Y, %B %d		
+	${dateFormatStatus11}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%m/%d/%Y		
+	${dateFormatStatus12}=	Run Keyword And Return Status		Convert Date		${firstDate}		date_format=%m-%d-%Y	
+	
+	${expectedDateFormatStatus1}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%b %d, %Y	
+	${expectedDateFormatStatus2}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%d-%m-%Y	
+	${expectedDateFormatStatus3}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%d/%m/%Y		
+	${expectedDateFormatStatus4}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%Y/%m/%d		
+	${expectedDateFormatStatus5}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%Y-%m-%d	
+	${expectedDateFormatStatus6}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%d %b, %Y	
+	${expectedDateFormatStatus7}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%Y, %b %d	
+	${expectedDateFormatStatus8}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%B %d, %Y	
+	${expectedDateFormatStatus9}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%d %B, %Y		
+	${expectedDateFormatStatus10}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%Y, %B %d		
+	${expectedDateFormatStatus11}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%m/%d/%Y		
+	${expectedDateFormatStatus12}=	Run Keyword And Return Status		Convert Date		${secondDate}		date_format=%m-%d-%Y	
+	
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus1}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%b %d, %Y		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus2}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%d-%m-%Y		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus3}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%d/%m/%Y		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus4}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%Y/%m/%d		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus5}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%Y-%m-%d		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus6}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%d %b, %Y		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus8}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus7}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%Y, %b %d		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus8}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%B %d, %Y		result_format=%m-%d-%Y
+	
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus9}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%d %B, %Y		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%m/%d/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus10}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%Y, %B %d		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus11}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%m/%d/%Y		result_format=%m-%d-%Y
+
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus1}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%b %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus2}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%d-%m-%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus3}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%d/%m/%Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus4}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%Y/%m/%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus5}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%Y-%m-%d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus6}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%d %b, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus7}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%Y, %b %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus9}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%B %d, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus10}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%d %B, %Y
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus11}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%Y, %B %d
+	${convertedDate}=	Run Keyword And Return If		${dateFormatStatus12}==True and ${expectedDateFormatStatus12}==True		Convert Date		${firstDate}		date_format=%m-%d-%Y		result_format=%m/%d/%Y
